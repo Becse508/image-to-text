@@ -5,9 +5,9 @@ example image: `output/img.txt`
 
 ## Currently available styles
 
-- accurate
+- **accurate:**
     characters: █,▓,▒,░,⠀ 
-- reverse_accurate
-- math
+- **reverse_accurate**
+- **math:**
     characters: %,/,+,=,-
 - reverse_math
