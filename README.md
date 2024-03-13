@@ -7,7 +7,7 @@ example image: `output/img.txt`
 ## Currently available styles
 
 - **accurate:**
-    characters: █,▓,▒,░,⠀ 
+    characters: █,▓,▒,░,blank
 - **reverse_accurate**
 - **math:**
     characters: %,/,+,=,-
