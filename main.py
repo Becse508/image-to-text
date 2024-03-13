@@ -14,7 +14,7 @@ INPUT_FOLDER = "images"
 OUTPUT_FOLDER = "output"
 STYLE = 'accurate'
 FILTER_FUNC = lambda a,b: a % b == 0 # a=row index, b=FILTERED_ROWS
-FILTERED_ROWS = 2 # row will not be kept if FILTER_FUNC is False
+FILTERED_ROWS = 2 # row will not be kept if FILTER_FUNC is False (needed because in text editors, a line's height is higher than a character's width, so I can't really make pixels)
 #               ^  Set to 0 to disable
 
 
