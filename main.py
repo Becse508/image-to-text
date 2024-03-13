@@ -15,6 +15,7 @@ OUTPUT_FOLDER = "output"
 STYLE = 'accurate'
 FILTER_FUNC = lambda a,b: a % b == 0 # a=row index, b=FILTERED_ROWS
 FILTERED_ROWS = 2 # row will not be kept if FILTER_FUNC is False
+#               ^  Set to 0 to disable
 
 
 
@@ -95,7 +96,7 @@ def get_image(image_path):
 
     channels = 3
     pixel_values = list(image.getdata())
-    pixel_values = np.array(pixel_values).reshape((width, height, channels))
+    pixel_values = np.array(pixel_values).reshape((height, width, channels))
     return list(pixel_values)
 
 
@@ -170,7 +171,7 @@ if __name__ == '__main__':
 
     _log.info(f"Input folder: {INPUT_FOLDER}")
     _log.info(f"Output folder: {OUTPUT_FOLDER}")
-    _log.warn("The program might not be able to convert all of your images into text files. Some of the generated text files might be corrupted.\n")
+    _log.warn("The program might not be able to convert all of your images into text files. Some of the generated text files might be obfuscated. If you encounter this, please let me know on Github.\n")
     
 
 
