@@ -9,14 +9,55 @@ except:
     TERMCOLOR = False
 
 
+LOGO = """
+████  ███        ████  ██████████████  ████████████ ██████████████ ██████  ██████ ██████████████
+████  ██████  ███████  ████                    ████      ████        ██████████        ████     
+████  ███████████████  ████      ████  ████████████      ████         ███████          ████     
+████  ████  ███  ████  ████      ████  ████              ████         ████████         ████     
+████  ████       ████  ████      ████  ████              ████       ████████████       ████     
+████  ████       ████  ██████████████  ████████████      ████     ██████    █████      ████     
+"""
+print(LOGO)
 
 INPUT_FOLDER = "images"
 OUTPUT_FOLDER = "output"
 STYLE = 'accurate'
 FILTER_FUNC = lambda a,b: a % b == 0 # a=row index, b=FILTERED_ROWS
-FILTERED_ROWS = 2 # row will not be kept if FILTER_FUNC is False (needed because in text editors, a line's height is higher than a character's width, so I can't really make pixels)
+FILTERED_ROWS = 2 # row will not be kept if FILTER_FUNC is False (needed because in text editors, a line's height is more than a character's width, so in the output, a pixel's size ratio is FILTERED_ROWS:1)
 #               ^  Set to 0 to disable
 
+BLANK_CHARS = (' ', '⠀', ' ')
+BLANK_CHAR = 0 # !!CAN CAUSE THE GENERATED TEXT TO FALL APART IF NOT SET TO 0!!
+STYLES = {
+    'math': {
+        '0-51' : '%',
+        '52-102' : '/',
+        '103-153' : '+',
+        '154-204' : '=',
+        '205-255' : '-'
+        },
+    'reverse_math': {
+        '0-51' : '-',
+        '52-102' : '=',
+        '103-153' : '+',
+        '154-204' : '/',
+        '205-255' : '%'
+        },
+    'accurate': {
+        '0-51' : '█',
+        '52-102' : '▓',
+        '103-153' : '▒',
+        '154-204' : '░',
+        '205-255' : BLANK_CHARS[BLANK_CHAR]
+        },
+    'reverse_accurate': {
+        '0-51' : BLANK_CHARS[BLANK_CHAR],
+        '52-102' : '░',
+        '103-153' : '▒',
+        '154-204' : '▓',
+        '205-255' : '█'
+        },
+}
 
 
 
@@ -121,38 +162,9 @@ def generate(image_data):
     out = ''
     for x in image_data:
         for y in x:
-            styles = {
-                'math': {
-                    '0-51' : '%',
-                    '52-102' : '/',
-                    '103-153' : '+',
-                    '154-204' : '=',
-                    '205-255' : '-'
-                    },
-                'reverse_math': {
-                    '0-51' : '-',
-                    '52-102' : '=',
-                    '103-153' : '+',
-                    '154-204' : '/',
-                    '205-255' : '%'
-                    },
-                'accurate': {
-                    '0-51' : '█',
-                    '52-102' : '▓',
-                    '103-153' : '▒',
-                    '154-204' : '░',
-                    '205-255' : '⠀'
-                    },
-                'reverse_accurate': {
-                    '0-51' : '⠀',
-                    '52-102' : '░',
-                    '103-153' : '▒',
-                    '154-204' : '▓',
-                    '205-255' : '█'
-                    },
-            }
+            
 
-            for key,value in styles[STYLE].items():
+            for key,value in STYLES[STYLE].items():
                 range = [int(x) for x in key.split('-')]
 
                 avg = sum(y)/3
